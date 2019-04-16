@@ -9,6 +9,7 @@ import { User } from '@/_models';
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
+    public usuario: User;
 
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
@@ -20,7 +21,11 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`${config.apiUrl}/users/authenticate`, { username, password })
+        // return this.http.post<any>(`${config.apiUrl}/users/authenticate`, { username, password })
+        // http://rcid.cl/api/sn5/usuarioinfo/Authorized?data={%22username%22:%22demo%22,%22password%22:%22demo%22}
+        var parametros = {'username': username, 'password': password };
+        /*
+        return this.http.get<any>("http://rcid.cl/api/sn5/usuarioinfo/Authorized?data=%7B%22username%22:%22" + username + "%22,%22password%22:%22" + password +  "%22%7D" )
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
@@ -31,6 +36,10 @@ export class AuthenticationService {
 
                 return user;
             }));
+        */
+        console.log("parametros");
+        console.log(parametros);
+        return this.http.get<any>("Authorized?data=%7B%22username%22:%22" + username + "%22,%22password%22:%22" + password +  "%22%7D" )
     }
 
     logout() {
