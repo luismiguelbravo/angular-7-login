@@ -7,7 +7,8 @@
     },
     "scripts": {
         "build": "webpack --mode production",
-        "start": "webpack-dev-server --mode development --open --proxy-config proxy.js"
+        "start": "webpack-dev-server --proxy-config proxy.js --mode development --open ",
+        "inicia" : "ng serve --proxy-config proxy.conf.json"
     },
     "license": "MIT",
     "dependencies": {

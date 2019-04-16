@@ -1,22 +1,6 @@
-var HttpsProxyAgent = require('https-proxy-agent');
-var proxyConfig = [{
-  context: '/api',
-  target: 'http://your-remote-server.com:3000',
-  secure: false
-}];
-
-function setupForCorporateProxy(proxyConfig) {
-  var proxyServer = process.env.http_proxy || process.env.HTTP_PROXY;
-  if (proxyServer) {
-    var agent = new HttpsProxyAgent(proxyServer);
-    console.log('Using corporate proxy server: ' + proxyServer);
-    proxyConfig.forEach(function(entry) {
-      entry.agent = agent;
-    });
+{
+  "/Authorized": {
+    "target": "http://rcid.cl/api/sn5/usuarioinfo/Authorized",
+    "secure": false
   }
-  return proxyConfig;
 }
-
-// http://rcid.cl/api/sn5/usuarioinfo/
-
-module.exports = setupForCorporateProxy(proxyConfig);
